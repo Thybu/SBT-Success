@@ -33,6 +33,24 @@ def projectTemplate(projectName: String): Project = Project(projectName, file(pr
     test in assembly := {},
     parallelExecution in test := false,
     concurrentRestrictions in Global += Tags.limit(Tags.Test, 1),
+    assemblyJarName in assembly := s"$projectName-v${Release.assemblyVersion(version.value, git.gitHeadCommit.value)}.jar",
+    releaseProcess := Release.customReleaseSteps,
+    releaseUseGlobalVersion := false,
+    releaseVersionFile := file(projectName + "/version.sbt"),
+    releaseTagName := s"$projectName-v${version.value}",
+    git.useGitDescribe := true,
+    publishTo := None,
+    buildInfoKeys := Seq[BuildInfoKey](
+      name,
+      scalaVersion,
+      BuildInfoKey.action("version") {
+        Release.assemblyVersion(version.value, git.gitHeadCommit.value)
+      },
+      BuildInfoKey.action("sha") {
+        git.gitHeadCommit.value
+      }
+    ),
+    buildInfoPackage := s"com.fyber.data.$projectName",
     libraryDependencies ++= Seq(
       "com.typesafe" % "config" % "1.3.0",
       "org.apache.spark" %% "spark-core" % "1.6.0" % "provided",
