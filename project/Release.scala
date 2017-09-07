@@ -54,8 +54,8 @@ object Release {
     crossAssembly,
     tagRelease,
     setNextVersion,
-    commitNextVersion,
-    pushChanges
+    commitNextVersion
+    //pushChanges
   )
 
   def assemblyVersion(version: String, headCommit: Option[String]) =
