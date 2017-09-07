@@ -1,0 +1,38 @@
+*.class
+*.log
+*.ssv
+.DS_Store
+
+# sbt specific
+.cache
+.history
+.lib/
+dist/*
+target/
+
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+native/
+test-output/
+
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+.idea
+*.iml
+
+# Folders with test output from migration
+migration/supply_side_payouts
+migration/spark-events
+
+# misc
+.bin
+
+# ruby
+.bundle
+
+# instrumentation
+native/
